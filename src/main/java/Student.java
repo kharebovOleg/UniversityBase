@@ -1,12 +1,13 @@
 public class Student {
 
-    private String fullName, universityId;
+    private String universityId;
+    private String fullName;
     private int currentCourseNumber;
     private float avgExamScore;
 
-    public Student(String fullName, String universityId, int currentCourseNumber, float avgExamScore) {
-        this.fullName = fullName;
+    public Student(String universityId, String fullName, int currentCourseNumber, float avgExamScore) {
         this.universityId = universityId;
+        this.fullName = fullName;
         this.currentCourseNumber = currentCourseNumber;
         this.avgExamScore = avgExamScore;
     }
@@ -17,8 +18,8 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "fullName='" + fullName + '\'' +
-                ", universityId='" + universityId + '\'' +
+                "universityId='" + universityId + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", currentCourseNumber=" + currentCourseNumber +
                 ", avgExamScore=" + avgExamScore +
                 '}';

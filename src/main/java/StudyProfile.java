@@ -1,5 +1,10 @@
 public enum StudyProfile {
-    ARCHITECT("Архитектор"), PAINTER("Художник"), LAWYER("Юрист"), MEDICINE("Медицина");
+    ARCHITECT("Архитектура"),
+    LAWYER("Юриспруденция"),
+    MEDICINE("Медицина"),
+    PHYSICS("Физика"),
+    LINGUISTICS("Лингвистика"),
+    MATHEMATICS("Математика");
 
     private String profileName;
 
@@ -7,4 +12,7 @@ public enum StudyProfile {
         this.profileName = profileName;
     }
 
+    public String getProfileName() {
+        return profileName;
+    }
 }
