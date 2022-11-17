@@ -13,20 +13,10 @@ import java.util.List;
 
 public class ListsCreator {
 
-    private static File f = new File("src/main/resources/universityInfo.xlsx");
-    private static ListsCreator instance;
-
     private ListsCreator() {
     }
 
-    public static ListsCreator getInstance(){
-        if (instance == null){
-            instance = new ListsCreator();
-        }
-        return instance;
-    }
-
-    public static XSSFWorkbook readExcel(){
+    public static XSSFWorkbook readExcel(File f){
         try {
             FileInputStream file = new FileInputStream(f);
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -63,7 +53,7 @@ public class ListsCreator {
                 (int) cells[2].getNumericCellValue(),(float) cells[3].getNumericCellValue()));
     }
 
-    public static void univercityAdd(Cell[] cells, List<University> list){
+    public static void universityAdd(Cell[] cells, List<University> list){
         list.add(new University(cells[0].getStringCellValue(),cells[1].getStringCellValue(),
                 cells[2].getStringCellValue(),(int) cells[3].getNumericCellValue(), getProfile(cells[4].getStringCellValue())));
     }
@@ -92,23 +82,8 @@ public class ListsCreator {
                 cells[i] = cell;
                 i++;
             }
-            univercityAdd(cells, universityList);
+            universityAdd(cells, universityList);
         }
         return universityList;
-    }
-
-
-    public static void printList(List<? extends Object> list) {
-        Iterator<?> st = list.iterator();
-        int i = 1;
-        while (st.hasNext()) {
-            System.out.println(i + ") " + st.next());
-            i++;
-        }
-
-    }
-
-    public static File getF() {
-        return f;
     }
 }

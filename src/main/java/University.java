@@ -43,9 +43,9 @@ public class University {
     @Override
     public String toString() {
         return "University{" +
+                ", id='" + id + '\'' +
                 "fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
-                ", id='" + id + '\'' +
                 ", yearOfFoundation=" + yearOfFoundation +
                 ", mainProfile=" + mainProfile +
                 '}';
