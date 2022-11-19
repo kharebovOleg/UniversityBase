@@ -28,8 +28,34 @@ public class Main {
         Stream<Student> studentStream = studentsList.stream();
         Stream<University> universityStream = universities.stream();
 
-        studentStream.sorted(byName).forEach(System.out::println);
-        universityStream.sorted(byProfile).forEach(System.out::println);
+        studentStream
+                .filter(student -> student.getAvgExamScore() > 4.5f)
+                .sorted(byName)
+                .limit(1)
+                .map(JsonUtil::jsonStudentWrite)
+                .peek(System.out::println)
+                .map(JsonUtil::jsonStudentRead)
+                .forEach(System.out::println);
 
+
+        universityStream
+                .sorted(byProfile)
+                .limit(1)
+                .map(JsonUtil::jsonUniversitiesWrite)
+                .peek(System.out::println)
+                .map(JsonUtil::jsonUniversityRead)
+                .forEach(System.out::println);
+
+//        List<String> stringsSt = JsonUtil.jsonListStudentsWrite(studentsList);
+//        List<String> stringsUn = JsonUtil.jsonListUniversitiesWrite(universities);
+//
+//        List<Student> studentsFromJson = JsonUtil.jsonStudentListRead(stringsSt);
+//        List<University> universitiesFromJson = JsonUtil.jsonUniversityListRead(stringsUn);
+//
+//        System.out.println(universities);
+//        System.out.println(universitiesFromJson);
+//
+//        System.out.println(studentsList);
+//        System.out.println(studentsFromJson);
     }
 }
