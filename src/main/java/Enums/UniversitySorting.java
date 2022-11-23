@@ -1,3 +1,5 @@
+package Enums;
+
 public enum UniversitySorting {
     ID("ПО ID"),
     FULLNAME("ПО ПОЛНОМУ ИМЕНИ"),

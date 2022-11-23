@@ -1,3 +1,7 @@
+package comparators;
+
+import model.Student;
+
 public class StudentsCurrentCourseNumberComparator implements StudentsComparator{
     @Override
     public int compare(Student o1, Student o2) {

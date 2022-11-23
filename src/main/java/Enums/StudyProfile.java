@@ -1,3 +1,5 @@
+package Enums;
+
 public enum StudyProfile {
     ARCHITECT("Архитектура"),
     LAWYER("Юриспруденция"),

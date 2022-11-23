@@ -1,3 +1,6 @@
+package model;
+
+import Enums.StudyProfile;
 import com.google.gson.annotations.SerializedName;
 
 public class University {
@@ -50,7 +53,7 @@ public class University {
 
     @Override
     public String toString() {
-        return "University{" +
+        return "model.University{" +
                 ", id='" + id + '\'' +
                 "fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +

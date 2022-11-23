@@ -1,3 +1,5 @@
+package model;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Student {
@@ -23,7 +25,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "model.Student{" +
                 "universityId='" + universityId + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", currentCourseNumber=" + currentCourseNumber +
