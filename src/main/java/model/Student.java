@@ -8,7 +8,7 @@ public class Student {
     private String universityId;
     @SerializedName("Name")
     private String fullName;
-    @SerializedName("Cours¹")
+    @SerializedName("Course")
     private int currentCourseNumber;
     @SerializedName("avgMark")
     private float avgExamScore;

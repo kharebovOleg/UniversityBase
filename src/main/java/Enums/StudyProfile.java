@@ -1,12 +1,12 @@
 package Enums;
 
 public enum StudyProfile {
-    ARCHITECT("Архитектура"),
-    LAWYER("Юриспруденция"),
-    MEDICINE("Медицина"),
-    PHYSICS("Физика"),
-    LINGUISTICS("Лингвистика"),
-    MATHEMATICS("Математика");
+    ARCHITECT("Architecture"),
+    LAWYER("Jurisprudence"),
+    MEDICINE("Medicine"),
+    PHYSICS("Physics"),
+    LINGUISTICS("Linguistics"),
+    MATHEMATICS("Math");
 
     private String profileName;
 

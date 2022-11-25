@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ListsCreator {
+public class XlsReader {
 
-    private ListsCreator() {
+    private XlsReader() {
     }
 
     public static XSSFWorkbook readExcel(File f){

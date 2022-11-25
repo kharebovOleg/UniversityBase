@@ -13,7 +13,7 @@ public class University {
     @SerializedName("foundation")
     private int yearOfFoundation;
     @SerializedName("profile")
-    StudyProfile mainProfile;
+    private StudyProfile mainProfile;
 
     public University() {}
 

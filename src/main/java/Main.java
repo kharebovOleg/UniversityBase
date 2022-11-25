@@ -1,8 +1,11 @@
 import Enums.StudentsSorting;
+import Enums.StudyProfile;
 import Enums.UniversitySorting;
 import comparators.StudentsComparator;
 import comparators.UniversityComparator;
-import io.ListsCreator;
+import io.XlsReader;
+import io.XlsWriter;
+import model.Statistics;
 import model.Student;
 import model.University;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -17,9 +20,9 @@ public class Main {
     public static void main(String[] args) {
 // creating Workbook
         File f = new File("src/main/resources/universityInfo.xlsx");
-        XSSFWorkbook workbook = ListsCreator.readExcel(f);
-        List<Student> studentsList = ListsCreator.createListStudents(workbook);
-        List<University> universities = ListsCreator.createListUniversity(workbook);
+        XSSFWorkbook workbook = XlsReader.readExcel(f);
+        List<Student> studentsList = XlsReader.createListStudents(workbook);
+        List<University> universities = XlsReader.createListUniversity(workbook);
 
 // students comparators
         StudentsComparator univerId = SortingChooser.choseStudentSorting(StudentsSorting.ID);
@@ -55,16 +58,15 @@ public class Main {
                 .map(JsonUtil::jsonUniversityRead)
                 .forEach(System.out::println);
 
-//        List<String> stringsSt = util.JsonUtil.jsonListStudentsWrite(studentsList);
-//        List<String> stringsUn = util.JsonUtil.jsonListUniversitiesWrite(universities);
-//
-//        List<model.Student> studentsFromJson = util.JsonUtil.jsonStudentListRead(stringsSt);
-//        List<model.University> universitiesFromJson = util.JsonUtil.jsonUniversityListRead(stringsUn);
-//
-//        System.out.println(universities);
-//        System.out.println(universitiesFromJson);
-//
-//        System.out.println(studentsList);
-//        System.out.println(studentsFromJson);
+        List<Statistics> st = new ArrayList<>();
+        Statistics e = new Statistics(StudyProfile.MATHEMATICS, 5,
+                11,5,"Ã√”");
+        Statistics avc = new Statistics(StudyProfile.MEDICINE, 3.5f,
+                4, 5, "sdgsdh");
+        st.add(e);
+        st.add(avc);
+        File file = new File("src/main/resources/toWrite.xlsx");
+        XlsWriter.writeToExcel(st, file);
+
     }
 }
