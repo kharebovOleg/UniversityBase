@@ -1,6 +1,6 @@
 package io;
 
-import Enums.StudyProfile;
+import enums.StudyProfile;
 import model.Student;
 import model.University;
 import org.apache.poi.ss.usermodel.Cell;

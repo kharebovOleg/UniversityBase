@@ -1,6 +1,5 @@
-import Enums.StudentsSorting;
-import Enums.StudyProfile;
-import Enums.UniversitySorting;
+import enums.StudentsSorting;
+import enums.UniversitySorting;
 import comparators.StudentsComparator;
 import comparators.UniversityComparator;
 import io.XlsReader;
@@ -11,6 +10,7 @@ import model.University;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import util.JsonUtil;
 import util.SortingChooser;
+import util.StatisticsCreator;
 
 import java.io.File;
 import java.util.*;
@@ -58,15 +58,11 @@ public class Main {
                 .map(JsonUtil::jsonUniversityRead)
                 .forEach(System.out::println);
 
-        List<Statistics> st = new ArrayList<>();
-        Statistics e = new Statistics(StudyProfile.MATHEMATICS, 5,
-                11,5,"Ã√”");
-        Statistics avc = new Statistics(StudyProfile.MEDICINE, 3.5f,
-                4, 5, "sdgsdh");
-        st.add(e);
-        st.add(avc);
+        List<Statistics> st = StatisticsCreator.statistica(studentsList,universities);
         File file = new File("src/main/resources/toWrite.xlsx");
         XlsWriter.writeToExcel(st, file);
+
+        st.forEach(System.out::println);
 
     }
 }

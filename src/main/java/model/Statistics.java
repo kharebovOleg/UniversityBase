@@ -1,6 +1,6 @@
 package model;
 
-import Enums.StudyProfile;
+import enums.StudyProfile;
 
 public class Statistics {
     private StudyProfile profile;
@@ -16,6 +16,10 @@ public class Statistics {
         this.amountStudentsByProfile = amountStudentsByProfile;
         this.amountUniversitiesByProfile = amountUniversitiesByProfile;
         this.universityName = uniersityNames;
+    }
+
+    public Statistics() {
+
     }
 
     public StudyProfile getProfile() {
@@ -58,8 +62,19 @@ public class Statistics {
         return universityName;
     }
 
-    public Statistics setUniversityName(String universityName) {
+    public Statistics setUniversityNames(String universityName) {
         this.universityName = universityName;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Statistics{" +
+                "profile=" + profile +
+                ", avgExam=" + avgExam +
+                ", amountStudentsByProfile=" + amountStudentsByProfile +
+                ", amountUniversitiesByProfile=" + amountUniversitiesByProfile +
+                ", universityName='" + universityName + '\'' +
+                '}';
     }
 }

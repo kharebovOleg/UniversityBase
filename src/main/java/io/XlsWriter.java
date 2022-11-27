@@ -19,13 +19,14 @@ public class XlsWriter {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Statistics");
 
-        Font head = createMyFont(workbook,"Times New Roman", true, 300);
+
+        Font head = createMyFont(workbook,"Times New Roman", true, 240);
         CellStyle style = workbook.createCellStyle();
         style.setFont(head);
 
         int rownum = 0;
-        createHead(sheet,rownum,style,"Profile", "AVG",
-                "amountStudentsByProfile", "amountUniversitiesByProfile", "universityName");
+        createHead(sheet,rownum,style,"Профиль", "Средняя оценка",
+                "Количество студентов", "Количество университетов", "Университеты");
 
 
         for (Statistics st : statistics) {
@@ -69,6 +70,10 @@ public class XlsWriter {
         Cell cell5 = row.createCell(4);
         cell5.setCellStyle(cs);
         cell5.setCellValue(e);
+
+        for (int i = 0; i < 5; i++) {
+            sheet.setColumnWidth(i,6000);
+        }
     }
 
     public static void createLine(XSSFSheet sheet, int rownum, Statistics st){

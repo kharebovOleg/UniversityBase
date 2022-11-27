@@ -1,7 +1,7 @@
 package util;
 
-import Enums.StudentsSorting;
-import Enums.UniversitySorting;
+import enums.StudentsSorting;
+import enums.UniversitySorting;
 import comparators.*;
 
 public class SortingChooser {
