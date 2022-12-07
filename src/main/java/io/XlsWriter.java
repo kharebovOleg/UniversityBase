@@ -9,16 +9,22 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class XlsWriter {
+
+    private static final Logger logger = Logger.getLogger(XlsWriter.class.getName());
 
     private XlsWriter() {
     }
 
     public static void writeToExcel(List<Statistics> statistics, File file) {
+
+        logger.log(Level.INFO, "Excel writing started");
+
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Statistics");
-
 
         Font head = createMyFont(workbook,"Times New Roman", true, 240);
         CellStyle style = workbook.createCellStyle();
@@ -37,11 +43,11 @@ public class XlsWriter {
             FileOutputStream fos = new FileOutputStream(file);
             workbook.write(fos);
             fos.close();
-            System.out.println("finished");
         } catch (Exception e) {
-            System.out.println("error");
+            logger.log(Level.SEVERE, "New excel file writing failed", e);
+            return;
         }
-
+        logger.log(Level.INFO, "Excel writing finished successfully");
     }
 
     public static Font createMyFont(@NotNull Workbook workbook, String fontName, boolean bold, int size) {

@@ -10,10 +10,18 @@ import org.apache.poi.ss.usermodel.ExcelNumberFormat;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class StatisticsCreator {
-    public static List<Statistics> statistica(List<Student> studentsList, List<University> universities){
+
+    private static final Logger logger = Logger.getLogger(StatisticsCreator.class.getName());
+
+    public static List<Statistics> statistica(List<Student> studentsList, List<University> universities) {
+
+        logger.log(Level.INFO, "Statistics module started");
+
         List<Statistics> statisticsArrayList = new ArrayList<>();
         // creating Set of profiles
         Set<StudyProfile> profiles = universities.stream()
@@ -40,7 +48,7 @@ public class StatisticsCreator {
                     .filter(university -> profileUnivIds.contains(university.getId()))
                     .map(University::getFullName)
                     .forEach(fullName -> statistics.setUniversityNames(
-                            statistics.getUniversityName() + fullName +";" ));
+                            statistics.getUniversityName() + fullName + ";"));
             //set amount of students (such as universities)
             List<Student> profileStudents = studentsList.stream()
                     .filter(student -> profileUnivIds.contains(student.getUniversityId()))
@@ -55,6 +63,9 @@ public class StatisticsCreator {
                     (float) BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_DOWN).doubleValue()));
 
         });
+
+        logger.log(Level.INFO,
+                String.format("Statistics module finished with %s statistical objects", statisticsArrayList.size()));
 
         return statisticsArrayList;
     }

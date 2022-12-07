@@ -1,68 +1,56 @@
-import enums.StudentsSorting;
-import enums.UniversitySorting;
 import comparators.StudentsComparator;
 import comparators.UniversityComparator;
+import enums.StudentsSorting;
+import enums.UniversitySorting;
 import io.XlsReader;
 import io.XlsWriter;
 import model.Statistics;
 import model.Student;
 import model.University;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import util.JsonUtil;
 import util.SortingChooser;
 import util.StatisticsCreator;
 
 import java.io.File;
-import java.util.*;
-import java.util.stream.Stream;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+
+import static java.util.logging.Level.INFO;
 
 public class Main {
+
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
+
+
     public static void main(String[] args) {
-// creating Workbook
+
+        try {
+            LogManager.getLogManager().readConfiguration(
+                    Main.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException e) {
+            System.err.println("Could not setup logger configuration: " + e.toString());
+        }
+
+        logger.log(INFO, "Application started, Logger configured");
+
         File f = new File("src/main/resources/universityInfo.xlsx");
         XSSFWorkbook workbook = XlsReader.readExcel(f);
+
         List<Student> studentsList = XlsReader.createListStudents(workbook);
         List<University> universities = XlsReader.createListUniversity(workbook);
 
-// students comparators
-        StudentsComparator univerId = SortingChooser.choseStudentSorting(StudentsSorting.ID);
         StudentsComparator byName = SortingChooser.choseStudentSorting(StudentsSorting.FULLNAME);
-        StudentsComparator byCourse = SortingChooser.choseStudentSorting(StudentsSorting.COURSE);
-        StudentsComparator byAvg = SortingChooser.choseStudentSorting(StudentsSorting.AVGEXAM);
-// universities comparators
-        UniversityComparator byId = SortingChooser.choseUniverSorting(UniversitySorting.ID);
-        UniversityComparator byFullName = SortingChooser.choseUniverSorting(UniversitySorting.FULLNAME);
-        UniversityComparator byShortName = SortingChooser.choseUniverSorting(UniversitySorting.SHORTNAME);
-        UniversityComparator byYear = SortingChooser.choseUniverSorting(UniversitySorting.YEAROFFOUNDATION);
+        studentsList.sort(byName);
         UniversityComparator byProfile = SortingChooser.choseUniverSorting(UniversitySorting.PROFILE);
-
-// streams
-        Stream<Student> studentStream = studentsList.stream();
-        Stream<University> universityStream = universities.stream();
-
-        studentStream
-                .filter(student -> student.getAvgExamScore() > 4.5f)
-                .sorted(byName)
-                .limit(1)
-                .map(JsonUtil::jsonStudentWrite)
-                .peek(System.out::println)
-                .map(JsonUtil::jsonStudentRead)
-                .forEach(System.out::println);
-
-
-        universityStream
-                .sorted(byProfile)
-                .limit(1)
-                .map(JsonUtil::jsonUniversitiesWrite)
-                .peek(System.out::println)
-                .map(JsonUtil::jsonUniversityRead)
-                .forEach(System.out::println);
+        universities.sort(byProfile);
 
         List<Statistics> st = StatisticsCreator.statistica(studentsList,universities);
+
         File file = new File("src/main/resources/toWrite.xlsx");
         XlsWriter.writeToExcel(st, file);
 
-        st.forEach(System.out::println);
-
+        logger.log(INFO, "Application finished");
     }
 }

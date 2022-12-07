@@ -15,20 +15,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class XlsReader {
+
+    private static final Logger logger = Logger.getLogger(XlsReader.class.getName());
 
     private XlsReader() {
     }
 
     public static XSSFWorkbook readExcel(File f){
+
         try {
+
+            logger.log(Level.INFO, "Excel reading started");
+
             FileInputStream file = new FileInputStream(f);
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             file.close();
+
+            logger.log(Level.INFO, "Excel reading finished successfully");
+
             return workbook;
         } catch (IOException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Excel reading failed", e);
             return null;
         }
     }
