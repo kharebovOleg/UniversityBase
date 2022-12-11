@@ -2,8 +2,10 @@ import comparators.StudentsComparator;
 import comparators.UniversityComparator;
 import enums.StudentsSorting;
 import enums.UniversitySorting;
+import io.JaxbWriter;
 import io.XlsReader;
 import io.XlsWriter;
+import model.AllInfo;
 import model.Statistics;
 import model.Student;
 import model.University;
@@ -13,6 +15,7 @@ import util.StatisticsCreator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.LogManager;
@@ -50,6 +53,14 @@ public class Main {
 
         File file = new File("src/main/resources/toWrite.xlsx");
         XlsWriter.writeToExcel(st, file);
+
+        AllInfo allLists = new AllInfo()
+                .setStatisticsList(st)
+                .setStudentList(studentsList)
+                .setUniversityList(universities)
+                .setProcessDate(new Date());
+
+        JaxbWriter.writeXml(allLists);
 
         logger.log(INFO, "Application finished");
     }
