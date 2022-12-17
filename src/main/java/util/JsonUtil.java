@@ -12,6 +12,10 @@ public class JsonUtil {
     private JsonUtil() {
     }
 
+    public static String writeListToJson(List<?> list) {
+        return new GsonBuilder().setPrettyPrinting().create().toJson(list);
+    }
+
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static String jsonStudentWrite(Student student) {

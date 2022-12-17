@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 public class JaxbWriter {
 
     private static final Logger log = Logger.getLogger(AllInfo.class.getName());
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 
     private JaxbWriter() {}
 
@@ -36,7 +38,9 @@ public class JaxbWriter {
             } catch (IOException ioEx) {
                 log.log(Level.FINE, "Directory already created", ioEx);
             }
-            File requestFile = new File("xmlReqs/infoReq" + new Date().getTime() + ".xml");
+
+
+            File requestFile = new File("xmlReqs/infoReq" + dateFormat.format(new Date()) + ".xml");
 
             marshaller.marshal(allLists, requestFile);
         } catch (JAXBException jaxbEx) {

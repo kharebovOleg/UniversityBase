@@ -3,6 +3,7 @@ import comparators.UniversityComparator;
 import enums.StudentsSorting;
 import enums.UniversitySorting;
 import io.JaxbWriter;
+import io.JsonWriter;
 import io.XlsReader;
 import io.XlsWriter;
 import model.AllInfo;
@@ -61,6 +62,7 @@ public class Main {
                 .setProcessDate(new Date());
 
         JaxbWriter.writeXml(allLists);
+        JsonWriter.writeJsonFile(allLists);
 
         logger.log(INFO, "Application finished");
     }
